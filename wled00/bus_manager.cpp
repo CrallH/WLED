@@ -901,7 +901,15 @@ BusHub75Matrix::BusHub75Matrix(const BusConfig &bc) : Bus(bc.type, bc.start, bc.
                     35, 5,  0,         // R2_PIN, G2_PIN, B2_PIN,
                     45, 1, 48,  2, 4,  //  A_PIN,  B_PIN,  C_PIN,  D_PIN,  E_PIN,
                     38, 21, 47 };      // LAT_PIN, OE_PIN,CLK_PIN
-
+  
+  #elif defined(SEENGREAT_V1_S3_REWIRED_PINOUT)
+  DEBUGBUS_PRINTLN("MatrixPanel_I2S_DMA - S3 devKit-C N16R8, SEENGREAT_V1 rewired (35/36/37 -> 9/10/11)");
+  // Seengreat V1 (Rev 1.2) with octal PSRAM module: DevKit pins 35/36/37 cut, bridged from GPIO 9/10/11
+  mxconfig.gpio = { 11, 6, 10,         // R1_PIN (adapter 37 <- GPIO11), G1_PIN, B1_PIN (adapter 36 <- GPIO10)
+                     9, 5,  0,         // R2_PIN (adapter 35 <- GPIO9),  G2_PIN, B2_PIN
+                    45, 1, 48,  2, 4,  //  A_PIN,  B_PIN,  C_PIN,  D_PIN,  E_PIN,
+                    38, 21, 47 };      // LAT_PIN, OE_PIN,CLK_PIN
+  
   #elif defined(SEENGREAT_V2_S3_PINOUT)
   DEBUGBUS_PRINTLN("MatrixPanel_I2S_DMA - S3 devKit-C, SEENGREAT_V2 pinout");
   // https://seengreat.com/wiki/186
